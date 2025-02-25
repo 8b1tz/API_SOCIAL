@@ -1,12 +1,20 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from app.database import Base, engine
 from app.routers import auth, feed, posts, profile, friends
 
 # Cria as tabelas no banco
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="API Social com Logout Real")
+app = FastAPI(title="API Social")
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.include_router(auth.router, prefix="/auth", tags=["auth"])
 app.include_router(feed.router, prefix="/feed", tags=["feed"])
 app.include_router(posts.router, prefix="/posts", tags=["posts"])
