@@ -3,13 +3,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.database import Base, engine
 from app.routers import auth, feed, posts, profile, friends
 
-# Cria as tabelas no banco
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="API Social")
 
 app.add_middleware(
-    CORSMiddleware,
+    CORSMiddleware, # type: ignore
     allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],

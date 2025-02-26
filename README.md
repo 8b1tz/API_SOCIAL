@@ -49,7 +49,8 @@ API_SOCIAL/
    ```
 
 2. **Inicie a aplicação** (na raiz do projeto):
-
+git status
+    
    ```bash
    uvicorn app.main:app --reload
    ```
