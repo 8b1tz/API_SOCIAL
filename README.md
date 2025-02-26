@@ -1,5 +1,4 @@
-# API Social Profissional com Logout Real
-
+# API Social
 Este projeto demonstra uma **API Social** completa utilizando:
 
 - **FastAPI** para criação de rotas e serviços de forma rápida e eficiente  
@@ -39,6 +38,12 @@ API_SOCIAL/
 
 1. **Instale as dependências**:
 
+  ```bash
+  python -m venv venv
+  ```
+  ```bash
+  venv/Scripts/activate
+   ```
    ```bash
    pip install -r requirements.txt
    ```
