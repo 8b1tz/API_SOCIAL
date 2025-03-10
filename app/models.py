@@ -11,6 +11,7 @@ class User(Base):
     email = Column(String, unique=True, index=True, nullable=False)
     hashed_password = Column(String, nullable=False)
     full_name = Column(String, nullable=True)
+    profile_image = Column(String, nullable=True)
 
     posts = relationship("Post", back_populates="author", cascade="all, delete")
     comments = relationship("Comment", back_populates="author", cascade="all, delete")

@@ -3,7 +3,7 @@ from typing import List
 from sqlalchemy.orm import Session
 from app.database import get_db
 from app.models import Post, Comment, Like, User
-from app.schemas import CommentCreate, CommentOut, LikeOut
+from app.schemas import CommentCreate, CommentOut, LikeOut, PostOut
 from app.routers.auth import get_current_user
 
 router = APIRouter()
@@ -61,3 +61,14 @@ def like_post(
     db.commit()
     db.refresh(new_like)
     return {"post_id": new_like.post_id, "user_id": new_like.user_id}
+
+@router.get("/", response_model=List[PostOut])
+def get_feed(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+    posts = (
+        db.query(Post)
+        .order_by(Post.created_at.desc())
+        .offset(skip)
+        .limit(limit)
+        .all()
+    )
+    return posts

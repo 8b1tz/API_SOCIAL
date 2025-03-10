@@ -17,12 +17,14 @@ def get_profile(db: Session = Depends(get_db), current_user: User = Depends(get_
 @router.put("/", response_model=UserOut)
 def update_profile(
     full_name: Optional[str] = None,
+    profile_image: Optional[str] = None,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_user),
 ):
-    """Atualiza dados do perfil do usuário logado."""
     if full_name is not None:
         current_user.full_name = full_name
+    if profile_image is not None:
+        current_user.profile_image = profile_image
     db.commit()
     db.refresh(current_user)
     return current_user
