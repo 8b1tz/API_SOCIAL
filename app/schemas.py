@@ -26,13 +26,22 @@ class PostBase(BaseModel):
     content: str
 
 class PostCreate(PostBase):
-    pass
+    content: str
+    image_urls: Optional[List[str]] = []
+
+class PostImageOut(BaseModel):
+    id: int
+    image_url: str
+
+    class Config:
+        orm_mode = True
 
 class PostOut(BaseModel):
     id: int
     content: str
     created_at: datetime
     author: UserOut
+    images: List[PostImageOut] = []
 
     class Config:
         from_attributes = True

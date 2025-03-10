@@ -28,6 +28,16 @@ class Post(Base):
 
     author = relationship("User", back_populates="posts")
     comments = relationship("Comment", back_populates="post", cascade="all, delete")
+    images = relationship("PostImage", back_populates="post", cascade="all, delete-orphan")
+
+class PostImage(Base):
+    __tablename__ = "post_images"
+
+    id = Column(Integer, primary_key=True, index=True)
+    image_url = Column(String, nullable=False)
+    post_id = Column(Integer, ForeignKey("posts.id", ondelete="CASCADE"))
+
+    post = relationship("Post", back_populates="images")
 
 class Comment(Base):
     __tablename__ = "comments"
