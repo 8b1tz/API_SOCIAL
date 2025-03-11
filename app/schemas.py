@@ -10,6 +10,8 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     password: str
     full_name: Optional[str] = None
+    profile_image: Optional[str] = None
+
 
 class UserOut(BaseModel):
     id: int
